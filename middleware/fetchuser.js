@@ -18,6 +18,7 @@ const fetchuser = (req,res,next) =>{
         req.user = data.user;
         next()
     } catch (error) {
+        console.log(error.message)
         res.status(401).send({error:"plz authenticate with a valid token.."})
         
     }  

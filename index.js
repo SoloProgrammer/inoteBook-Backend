@@ -16,7 +16,6 @@ app.use(cors())
 
 app.use('/api/auth',require('./Routes/auth.js'))
 app.use('/api/note',require('./Routes/note.js'))
-app.use('/api/comment',require('./Routes/comment.js'))
 
 
 // app.use('/api/shop',require('./Routes/shop.js'))  !! sorry,its a practice route just ignore it...... Thanks

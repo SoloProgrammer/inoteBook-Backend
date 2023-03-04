@@ -5,7 +5,6 @@ const { body, validationResult } = require('express-validator');
 const fetchuser = require('../middleware/fetchuser')
 const Note = require('../models/Note');
 const User = require('../models/User');
-const Comment = require('../models/Comment');
 //...........................................................ROUTE 1 FOR fetchingall notes of loggedin user
 
 
@@ -14,13 +13,10 @@ const Comment = require('../models/Comment');
 router.get('/fetchallnotes', fetchuser, async (req, res) => {
 
     try {
-
         const notes = await Note.find({ user: req.user.id });
 
         const allnotes = await Note.find({});
 
-        // res.json(notes)
-        // console.log("......",notes);
         const user1 = await User.findById(req.user.id)
         // console.log(user1)
         res.json({ user1, notes , allnotes })

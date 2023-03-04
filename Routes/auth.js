@@ -9,10 +9,9 @@ let fetchuser = require('../middleware/fetchuser')
 const jwt = require('jsonwebtoken');
 
 
-const JWT_SECRET = "@iamapro$coder"
+const JWT_SECRET = process.env.jwt_secret
 
 //...........................................................ROUTE 1 FOR CREATING A USER
-
 
 // Create a User  using: POST "api/auth/createuser" Doesnt require Auth or no login required
 router.post('/createuser', [
@@ -82,8 +81,6 @@ router.post('/authenticate_user', [
 
     const { email, password } = req.body;
 
-   
-
     if(email === "Admin23@gmail.com" && password === "pass99scam"){
             console.log(email)
 
@@ -93,6 +90,7 @@ router.post('/authenticate_user', [
     }
     else{
         try {
+
             let user = await User.findOne({ email })  //......... model .findone return s a promise
             // console.log(user._id)
             if (!user) {
@@ -123,7 +121,7 @@ router.post('/authenticate_user', [
 
         } catch (error) {
             // console.error(error.message)
-            res.status(500).send("Internal server error")
+            res.status(500).json({msg:"Internal server error",error:error.message})
         }
             
     }
